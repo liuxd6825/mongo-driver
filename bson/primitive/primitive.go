@@ -43,17 +43,21 @@ type DateTime int64
 var _ json.Marshaler = DateTime(0)
 var _ json.Unmarshaler = (*DateTime)(nil)
 
-const LocalTimeFormat = "2006-01-02 15:04:05"
-const LocalDateFormat = "2006-01-02"
+var CustomTimeFormat = "2006-01-02 15:04:05"
+var CustomDateFormat = "2006-01-02"
+var UseCustomTimeFormat = false
 
 // MarshalJSON marshal to time type.
 func (d DateTime) MarshalJSON() ([]byte, error) {
 	// lxd liuxd 刘旭东
 	// 本地化日期格式
 	t := d.Time().UTC()
-	format := LocalTimeFormat
+	if !UseCustomTimeFormat {
+		return json.Marshal(t)
+	}
+	format := CustomTimeFormat
 	if t.Hour() == 0 && t.Minute() == 0 && t.Second() == 0 {
-		format = LocalDateFormat
+		format = CustomDateFormat
 	}
 	b := make([]byte, 0, len(format)+2)
 	b = append(b, '"')
