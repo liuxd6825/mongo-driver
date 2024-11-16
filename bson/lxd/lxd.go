@@ -1,3 +1,5 @@
+// Package lxd
+// @Description: liuxd 刘旭东
 package lxd
 
 import (
@@ -8,7 +10,11 @@ import (
 	"unicode"
 )
 
-// GetDbFieldName 驼峰式写法转为下划线写法
+// GetFieldName
+//
+//	@Description: 驼峰式写法转为下划线写法
+//	@param name 字段名称
+//	@return string
 func GetFieldName(name string) string {
 	if name == "id" {
 		return "_id"
@@ -27,7 +33,7 @@ func GetFieldName(name string) string {
 	return buffer.String()
 }
 
-// Case2camel
+// GetPropertyName
 //
 // @Description:  下划线写法转为驼峰式，并首字母小写  id -> id, _id -> id, _key -> key , key_name -> keyName
 // @param fieldName
