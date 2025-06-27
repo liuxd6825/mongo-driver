@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"log"
 	"strconv"
-	"strings"
 	"unicode"
 )
 
@@ -16,9 +15,9 @@ import (
 //	@param name 字段名称
 //	@return string
 func GetFieldName(name string) string {
-	if name == "id" {
+	/*if name == "id" {
 		return "_id"
-	}
+	}*/
 	buffer := newBuffer()
 	for i, r := range name {
 		if unicode.IsUpper(r) {
@@ -39,19 +38,22 @@ func GetFieldName(name string) string {
 // @param fieldName
 // @return string
 func GetPropertyName(key string) string {
-	if key == "" {
-		return ""
-	}
-	if key == "_id" {
-		key = "id"
-	} else {
-		key = camelString(key)
-	}
-	if strings.HasPrefix(key, "_") {
-		key = key[1:]
-	}
+	return camelString(key)
+	/*
+		if key == "" {
+			return ""
+		}
+		if key == "_id" {
+			key = "id"
+		} else {
+			key = camelString(key)
+		}
+		if strings.HasPrefix(key, "_") {
+			key = key[1:]
+		}
 
-	return strings.ToLower(key[:1]) + key[1:]
+		return strings.ToLower(key[:1]) + key[1:]
+	*/
 }
 
 // CamelString 蛇形转驼峰
