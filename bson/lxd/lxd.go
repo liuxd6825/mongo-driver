@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"log"
 	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -38,22 +39,12 @@ func GetFieldName(name string) string {
 // @param fieldName
 // @return string
 func GetPropertyName(key string) string {
-	return camelString(key)
-	/*
-		if key == "" {
-			return ""
-		}
-		if key == "_id" {
-			key = "id"
-		} else {
-			key = camelString(key)
-		}
-		if strings.HasPrefix(key, "_") {
-			key = key[1:]
-		}
-
-		return strings.ToLower(key[:1]) + key[1:]
-	*/
+	//return camelString(key)
+	if key == "" {
+		return ""
+	}
+	key = camelString(key)
+	return strings.ToLower(key[:1]) + key[1:]
 }
 
 // CamelString 蛇形转驼峰
