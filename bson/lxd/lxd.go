@@ -6,45 +6,49 @@ import (
 	"bytes"
 	"log"
 	"strconv"
-	"strings"
-	"unicode"
 )
 
 // GetFieldName
 //
-//	@Description: 驼峰式写法转为下划线写法
+//	@Description: 驼峰式写法转为下划线写法 更新时使用
 //	@param name 字段名称
 //	@return string
 func GetFieldName(name string) string {
-	/*if name == "id" {
-		return "_id"
-	}*/
-	buffer := newBuffer()
-	for i, r := range name {
-		if unicode.IsUpper(r) {
-			if i != 0 {
-				buffer.Append('_')
-			}
-			buffer.Append(unicode.ToLower(r))
-		} else {
-			buffer.Append(r)
+	return name
+	/*
+		if name == "_id" {
+			return "_id"
 		}
-	}
-	return buffer.String()
+		buffer := newBuffer()
+		for i, r := range name {
+			if unicode.IsUpper(r) {
+				if i != 0 {
+					buffer.Append('_')
+				}
+				buffer.Append(unicode.ToLower(r))
+			} else {
+				buffer.Append(r)
+			}
+		}
+		return buffer.String()
+	*/
 }
 
 // GetPropertyName
 //
-// @Description:  下划线写法转为驼峰式，并首字母小写  id -> id, _id -> id, _key -> key , key_name -> keyName
+// @Description:  查询时使用，下划线写法转为驼峰式，并首字母小写  id -> id, _id -> id, _key -> key , key_name -> keyName
 // @param fieldName
 // @return string
 func GetPropertyName(key string) string {
+	return key
 	//return camelString(key)
-	if key == "" {
-		return ""
-	}
-	key = camelString(key)
-	return strings.ToLower(key[:1]) + key[1:]
+	/*
+		if key == "_id" {
+			return key
+		}
+		key = camelString(key)
+		return strings.ToLower(key[:1]) + key[1:]
+	*/
 }
 
 // CamelString 蛇形转驼峰
